@@ -1,9 +1,14 @@
+
 /*
  * Generates a random integer from min to max.
  */
 function randint(min, max) {
   return Math.round(min + Math.random() * (max - min));
 }
+let total = 0;
+let newScore = 0;
+
+let dealerSc = 0;
 
 /*
  * The deck of cards to deal from.
@@ -86,7 +91,7 @@ class Deck {
   /*hit(player) {
   return this.cards.pop().mount(document.querySelector(`#${player}-hand .cards`));
   }*/
-
+  
   player() {
     let result = document.querySelector("#player-hand .score");
 
@@ -98,20 +103,58 @@ class Deck {
     card1.mount(this.render('player'));
     console.log(card1);
 
-    let total = card.value + card1.value;
+    total = card.value + card1.value;
     result.innerHTML = `Score: ${total}`
     return total;
   }
 
   dealer() {
-    this.card = this.cards.pop();
     let dealerDeck = document.querySelector("#dealer-cards");
-    this.card = this.card.mount(dealerDeck);
+
+    let cardD = this.cards.pop();
+    cardD.mount(dealerDeck);
     
+    dealerSc = cardD.value;
+
     this.dealerCard = this.cards.pop();
     this.dealerCard.mountReversed(dealerDeck);
     console.log(this.card);
     return this.card;
   }
+
+  hit() {
+    let result = document.querySelector("#player-hand .score");
+
+    let card2 = this.cards.pop();
+    card2.mount(this.render('player'));
+    console.log(card2);
+
+    newScore = total + card2.value;
+    result.innerHTML = `Score: ${newScore}`;
+  
+  }
+
+  stand() {
+    let dealersScore = document.querySelector("#dealer-hand .score");
+    let dealerDeck = document.querySelector("#dealer-cards");
+
+    let cardD2 = this.cards.pop();
+    cardD2.mount(dealerDeck);
+
+    document.querySelector(".face-revers").style.display = "none";
+
+    dealerSc += cardD2.value;
+    dealersScore.innerHTML = `Score: ${dealerSc}`;
+
+
+    let message = document.querySelector('.table');
+    if(dealerSc > newScore) {
+      message.innerHTML = "You lost! Refresh the browser to play again.";
+    } else {
+      message.innerHTML = "You won! Refresh the browser to play again."
+    }
+    
+  }
+  
 
 }

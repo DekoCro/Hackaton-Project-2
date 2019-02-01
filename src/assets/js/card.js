@@ -29,7 +29,7 @@ class Card {
       this.element.className = "card face-revers";
       return this.element;
 
-    }
+    };
 
 
 
