@@ -78,31 +78,40 @@ class Deck {
     }
   }
 
-  /*render(player) {
+  render(player) {
     this.element = document.querySelector(`#${player}-hand .cards`);
     return this.element;
-  }*/
+  }
 
   /*hit(player) {
   return this.cards.pop().mount(document.querySelector(`#${player}-hand .cards`));
   }*/
 
-  player(piece) {
-    for(let i = 0; i < piece; i++){
-      this.card = this.cards.pop();
-      let playerDeck = document.querySelector("#player-hand");
-      
-      this.card.mount(playerDeck);
-    }
+  player() {
+    let result = document.querySelector("#player-hand .score");
 
+    let card = this.cards.pop();
+    card.mount(this.render('player'));
+    console.log(card);
+
+    let card1 = this.cards.pop();
+    card1.mount(this.render('player'));
+    console.log(card1);
+
+    let total = card.value + card1.value;
+    result.innerHTML = `Score: ${total}`
+    return total;
   }
 
-  dealer () {
+  dealer() {
     this.card = this.cards.pop();
-    let dealerDeck = document.querySelector("#dealer-hand");
-    this.card.mount(dealerDeck);
+    let dealerDeck = document.querySelector("#dealer-cards");
+    this.card = this.card.mount(dealerDeck);
+    
     this.dealerCard = this.cards.pop();
     this.dealerCard.mountReversed(dealerDeck);
+    console.log(this.card);
+    return this.card;
   }
 
 }

@@ -1,4 +1,4 @@
-let hitBtn = document.querySelector(".js-hit");
+let startGame = document.querySelector(".js-deal");
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const deck = new Deck();
  
   deck.shuffle();
-  console.log(deck); 
+  console.log(deck);
 
-
-  hitBtn.addEventListener("click", () => {
-    console.log(deck.player(2));
-    console.log(deck.dealer());
-  })
+  startGame.addEventListener("click", () => {
+    deck.player();
+    deck.dealer();
+ 
+  });
   
 });
