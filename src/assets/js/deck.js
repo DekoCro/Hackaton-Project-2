@@ -77,4 +77,32 @@ class Deck {
       this.cards[j] = swap;
     }
   }
+
+  /*render(player) {
+    this.element = document.querySelector(`#${player}-hand .cards`);
+    return this.element;
+  }*/
+
+  /*hit(player) {
+  return this.cards.pop().mount(document.querySelector(`#${player}-hand .cards`));
+  }*/
+
+  player(piece) {
+    for(let i = 0; i < piece; i++){
+      this.card = this.cards.pop();
+      let playerDeck = document.querySelector("#player-hand");
+      
+      this.card.mount(playerDeck);
+    }
+
+  }
+
+  dealer () {
+    this.card = this.cards.pop();
+    let dealerDeck = document.querySelector("#dealer-hand");
+    this.card.mount(dealerDeck);
+    this.dealerCard = this.cards.pop();
+    this.dealerCard.mountReversed(dealerDeck);
+  }
+
 }

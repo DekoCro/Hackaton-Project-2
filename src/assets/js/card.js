@@ -6,4 +6,26 @@ class Card {
     this.rank = rank;
     this.suit = suit;
   }
+
+  render() {
+    this.element = document.createElement("div");
+    this.element.className = `card face-${this.rank}-of-${this.suit}`;
+    return this.element;
+    };
+
+  reversedCard () {
+      this.element = document.createElement("div");
+      this.element.className = "card face-revers"
+      return this.element;
+
+    }
+
+
+  mount(parent) {
+    parent.appendChild(this.render());
+  }
+
+  mountReversed(parent) {
+    parent.appendChild(this.reversedCard());
+  }
 } 
